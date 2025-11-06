@@ -11,6 +11,8 @@ public class Cell
     public static final int TOP_MARGIN = 10;
     public static final int CELL_SIZE = 20;
 
+    public static final int MAX_SCENT = 25;
+
     private int contentType;
     private int myRow, myCol;
     private Nest myNest = null; // may be null, in which case there isn't a nest here.
@@ -24,7 +26,6 @@ public class Cell
         myCol = col;
         contentType = 0;
     }
-
 
     public int getContentType()
     {
@@ -88,9 +89,22 @@ public class Cell
         setBasket(null);
     }
 
+    public void markCellWithScent(int whichColor)
+    {
+        myScents[whichColor] = MAX_SCENT;
+    }
+
+    public void fadeScents()
+    {
+        for (int i=0; i<3; i++)
+        {
+            myScents[i] = Math.max(0, myScents[i] -1);
+        }
+    }
+
     public void drawSelf(Graphics g)
     {
-        g.setColor(new Color(myScents[0], myScents[1], myScents[2]));
+        g.setColor(new Color(255*myScents[0]/MAX_SCENT, 255*myScents[1]/MAX_SCENT, 255*myScents[2]/MAX_SCENT));
         g.fillRect(LEFT_MARGIN+myCol*CELL_SIZE, TOP_MARGIN+myRow*CELL_SIZE, CELL_SIZE, CELL_SIZE);
         g.setColor(Color.darkGray);
         g.drawRect(LEFT_MARGIN+myCol*CELL_SIZE, TOP_MARGIN+myRow*CELL_SIZE, CELL_SIZE, CELL_SIZE);
