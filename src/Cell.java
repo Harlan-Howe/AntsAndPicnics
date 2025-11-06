@@ -76,10 +76,16 @@ public class Cell
             contentType = TYPE_BASKET;
         }
         else
+            if (contentType == TYPE_EMPTY)
+                System.out.println("Warning: you are attempting to clear the basket from a Cell that does not have one. ("+myRow+","+myCol+").");
             contentType = TYPE_EMPTY;
 
         myBasket = b;
+    }
 
+    public void clearBasket()
+    {
+        setBasket(null);
     }
 
     public void drawSelf(Graphics g)
