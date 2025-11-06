@@ -23,6 +23,6 @@ public class PicnicWindow extends JFrame
 
     public void run()
     {
-        // start animation loop.
+        myPanel.startAnimation();
     }
 }
