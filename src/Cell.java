@@ -39,6 +39,26 @@ public class Cell
             return myNest;
     }
 
+    public void setNest(Nest n)
+    {
+
+
+        if (n != null)
+        {
+            if (contentType != TYPE_EMPTY)
+                throw new RuntimeException("You tried to put a nest into a cell at (" + myRow + ", " + myCol + ") but it wasn't empty.");
+            if (myRow != n.getRow() || myCol != n.getCol())
+                throw new RuntimeException("Call at ("+myRow+", "+myCol+") should not get nest that thinks it is at ("+
+                        n.getRow()+", "+n.getCol()+").");
+            contentType = TYPE_NEST;
+        }
+        else
+            contentType = TYPE_EMPTY;
+
+        myNest = n;
+
+    }
+
     public Basket getBasket()
     {
         if (contentType != TYPE_BASKET)
@@ -54,5 +74,7 @@ public class Cell
         g.setColor(Color.darkGray);
         g.drawRect(LEFT_MARGIN+myCol*CELL_SIZE, TOP_MARGIN+myRow*CELL_SIZE, CELL_SIZE, CELL_SIZE);
 
+        if (contentType == TYPE_NEST)
+            myNest.drawSelf(g);
     }
 }
