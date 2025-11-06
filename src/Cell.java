@@ -41,8 +41,6 @@ public class Cell
 
     public void setNest(Nest n)
     {
-
-
         if (n != null)
         {
             if (contentType != TYPE_EMPTY)
@@ -56,7 +54,6 @@ public class Cell
             contentType = TYPE_EMPTY;
 
         myNest = n;
-
     }
 
     public Basket getBasket()
@@ -65,6 +62,24 @@ public class Cell
             throw new RuntimeException("You tried to get a basket at (" + myRow + ", " + myCol + ") but there isn't one there.");
         else
             return myBasket;
+    }
+
+    public void setBasket(Basket b)
+    {
+        if (b != null)
+        {
+            if (contentType != TYPE_EMPTY)
+                throw new RuntimeException("You tried to put a basket into a cell at (" + myRow + ", " + myCol + ") but it wasn't empty.");
+            if (myRow != b.getRow() || myCol != b.getCol())
+                throw new RuntimeException("Call at ("+myRow+", "+myCol+") should not get basket that thinks it is at ("+
+                        b.getRow()+", "+b.getCol()+").");
+            contentType = TYPE_BASKET;
+        }
+        else
+            contentType = TYPE_EMPTY;
+
+        myBasket = b;
+
     }
 
     public void drawSelf(Graphics g)
@@ -76,5 +91,8 @@ public class Cell
 
         if (contentType == TYPE_NEST)
             myNest.drawSelf(g);
+
+        if (contentType == TYPE_BASKET)
+            myBasket.drawSelf(g);
     }
 }
