@@ -17,6 +17,7 @@ public class Cell
     private int myRow, myCol;
     private Nest myNest = null; // may be null, in which case there isn't a nest here.
     private Basket myBasket = null; // may be null, in which case there isn't a basket here.
+    private Ant myAnt = null; // may be null, in which case there isn't an ant here.
 
     private int[] myScents = {0, 0, 0};
 
@@ -88,6 +89,42 @@ public class Cell
     public void clearBasket()
     {
         setBasket(null);
+    }
+
+    public Ant getAnt()
+    {
+        if (contentType != TYPE_ANT)
+            throw new RuntimeException("You tried to get an ant at (" + myRow + ", " + myCol + ") but there isn't one there.");
+        else
+            return myAnt;
+
+    }
+
+    public void setAnt(Ant a)
+    {
+        {
+            if (a != null)
+            {
+                if (contentType != TYPE_EMPTY)
+                    throw new RuntimeException("You tried to put a ant into a cell at (" + myRow + ", " + myCol + ") but it wasn't empty.");
+                if (myRow != a.getRow() || myCol != a.getCol())
+                    throw new RuntimeException("Call at ("+myRow+", "+myCol+") should not get ant that thinks it is at ("+
+                            a.getRow()+", "+a.getCol()+").");
+                contentType = TYPE_BASKET;
+            }
+            else
+            {
+                if (contentType == TYPE_EMPTY)
+                    System.out.println("Warning: you are attempting to clear the ant from a Cell that does not have one. (" + myRow + "," + myCol + ").");
+                contentType = TYPE_EMPTY;
+            }
+            myAnt = a;
+        }
+    }
+
+    public void clearAnt()
+    {
+        setAnt(null);
     }
 
     public void markCellWithScent(int whichColor)
