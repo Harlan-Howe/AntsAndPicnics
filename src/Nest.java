@@ -30,6 +30,16 @@ public class Nest
         return myColor;
     }
 
+    public int getRow()
+    {
+        return myRow;
+    }
+
+    public int getCol()
+    {
+        return myCol;
+    }
+
     public void drawSelf(Graphics g)
     {
         g.setColor(PicnicPanel.NEST_AND_ANT_COLORS[myColor]);
