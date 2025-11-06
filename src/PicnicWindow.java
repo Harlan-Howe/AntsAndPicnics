@@ -9,7 +9,8 @@ public class PicnicWindow extends JFrame
     public PicnicWindow()
     {
         super("Picnic");
-        setSize(Cell.CELL_SIZE * World.NUM_COLS_IN_WORLD, Cell.CELL_SIZE * World.NUM_ROWS_IN_WORLD + 32);
+        setSize(Cell.CELL_SIZE * World.NUM_COLS_IN_WORLD+Cell.LEFT_MARGIN*2,
+                Cell.CELL_SIZE * World.NUM_ROWS_IN_WORLD + Cell.TOP_MARGIN* 2 + 32);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.getContentPane().setLayout(new GridLayout(1,1));
         myWorld = new World();
