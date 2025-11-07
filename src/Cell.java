@@ -33,6 +33,10 @@ public class Cell
         return contentType;
     }
 
+    /**
+     * gets the nest stored in this cell. If there isn't one, throws an exception, so you should have checked getContentType() first.
+     * @return the nest object stored in this cell.
+     */
     public Nest getNest()
     {
         if (contentType != TYPE_NEST)
@@ -41,6 +45,11 @@ public class Cell
             return myNest;
     }
 
+    /**
+     * attempts to put a nest (or null) into this cell. If adding a nest, this cell must be empty and the nest's row,
+     * col must match this cell. If setting to null, this cell must have a nest to remove.
+     * @param n - the nest to add, or null.
+     */
     public void setNest(Nest n)
     {
         if (n != null)
@@ -53,11 +62,20 @@ public class Cell
             contentType = TYPE_NEST;
         }
         else
+        {
+            if (contentType != TYPE_NEST)
+                throw new RuntimeException("You attemtped to clear a nest from (" + myRow + ", " + myCol +
+                        ") but there wasn't one there.");
             contentType = TYPE_EMPTY;
+        }
 
         myNest = n;
     }
 
+    /**
+     * gets the basket stored in this cell. If there isn't one, throws an exception, so you should have checked getContentType() first.
+     * @return the basket stored in this cell.
+     */
     public Basket getBasket()
     {
         if (contentType != TYPE_BASKET)
@@ -66,6 +84,11 @@ public class Cell
             return myBasket;
     }
 
+    /**
+     * attempts to put a basket (or null) into this cell. If adding a basket, this cell must be empty and the basket's row,
+     * col must match this cell. If setting to null, this cell must have a basket to remove.
+     * @param b - the basket to add, or null.
+     */
     public void setBasket(Basket b)
     {
         if (b != null)
@@ -79,18 +102,24 @@ public class Cell
         }
         else
         {
-            if (contentType == TYPE_EMPTY)
+            if (contentType != TYPE_BASKET)
                 System.out.println("Warning: you are attempting to clear the basket from a Cell that does not have one. (" + myRow + "," + myCol + ").");
             contentType = TYPE_EMPTY;
         }
         myBasket = b;
     }
 
+    /**
+     * a convenience method, properly removes the basket from this cell, if there is one. Throws an exception if there isn't!
+     */
     public void clearBasket()
     {
         setBasket(null);
     }
-
+    /**
+     * gets the ant stored in this cell. If there isn't one, throws an exception, so you should have checked getContentType() first.
+     * @return the ant stored in this cell.
+     */
     public Ant getAnt()
     {
         if (contentType != TYPE_ANT)
@@ -99,7 +128,11 @@ public class Cell
             return myAnt;
 
     }
-
+    /**
+     * attempts to put an ant (or null) into this cell. If adding a ant, this cell must be empty and the ant's row,
+     * col must match this cell. If setting to null, this cell must have an ant to remove.
+     * @param a - the ant to add, or null.
+     */
     public void setAnt(Ant a)
     {
         {
@@ -114,7 +147,7 @@ public class Cell
             }
             else
             {
-                if (contentType == TYPE_EMPTY)
+                if (contentType != TYPE_ANT)
                     System.out.println("Warning: you are attempting to clear the ant from a Cell that does not have one. (" + myRow + "," + myCol + ").");
                 contentType = TYPE_EMPTY;
             }
@@ -122,16 +155,26 @@ public class Cell
         }
     }
 
+    /**
+     *  a convenience method for removing an ant from a cell. Throws an exception if there isn't an ant there.
+     */
     public void clearAnt()
     {
         setAnt(null);
     }
 
+    /**
+     * sets the red, green or blue channel of scent to full strength.
+     * @param whichColor - 0 = red, 1 = green, 2 = blue
+     */
     public void markCellWithScent(int whichColor)
     {
         myScents[whichColor] = MAX_SCENT;
     }
 
+    /**
+     * decreases all three scents in this cell by one, if they are positive.
+     */
     public void fadeScents()
     {
         for (int i=0; i<3; i++)
@@ -140,6 +183,10 @@ public class Cell
         }
     }
 
+    /**
+     * draws this cell, its scent profile, and any contents it has.
+     * @param g - the "Graphics' object that has the drawing tools and the canvas in which to draw.
+     */
     public void drawSelf(Graphics g)
     {
         g.setColor(new Color(255*myScents[0]/MAX_SCENT, 255*myScents[1]/MAX_SCENT, 255*myScents[2]/MAX_SCENT));
@@ -152,5 +199,8 @@ public class Cell
 
         if (contentType == TYPE_BASKET)
             myBasket.drawSelf(g);
+
+        if (contentType == TYPE_ANT)
+            myAnt.drawSelf(g);
     }
 }
