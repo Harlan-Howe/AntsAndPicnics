@@ -6,6 +6,10 @@ public class World
     public static final int NUM_COLS_IN_WORLD = 40;
 
     private Cell[][] grid;
+    private Basket[] basket_list;
+    private Nest[] nest_list;
+    private Ant[] ant_list;
+
 
     public World()
     {
@@ -14,17 +18,13 @@ public class World
             for (int c = 0; c<NUM_COLS_IN_WORLD; c++)
                 grid[r][c] = new Cell(r,c);
 
-        // the rest of this method is temporary... to test that the nests, baskets and scents are showing (and fading)
-        // TODO: delete the rest of this method and replace it with your own intialization code.
-        Nest tempNest = new Nest(2, 2, 0);
-        grid[2][2].setNest(tempNest);
+        basket_list = new Basket[6];
+        nest_list = new Nest[3];
+        ant_list = new Ant[3];
 
-        Basket tempBasket = new Basket();
-        grid[tempBasket.getRow()][tempBasket.getCol()].setBasket(tempBasket);
-        System.out.println(tempBasket.getRow()+","+tempBasket.getCol());
-
-        grid[20][20].markCellWithScent(2);
-
+        place_nests();
+        place_baskets();
+        place_ants();
     }
 
     /**
@@ -46,6 +46,50 @@ public class World
         for (int r =0; r < NUM_ROWS_IN_WORLD; r++)
             for (int c = 0; c<NUM_COLS_IN_WORLD; c++)
                 grid[r][c].fadeScents();
+    }
+
+    /**
+     * put the 3 nests in random, empty locations.
+     */
+    public void place_nests()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            int r, c;
+            do
+            {
+                r = (int)(Math.random()*NUM_ROWS_IN_WORLD);
+                c = (int)(Math.random()*NUM_COLS_IN_WORLD);
+            } while (grid[r][c].getContentType() != Cell.TYPE_EMPTY);
+            nest_list[i] =new Nest(r, c, i);
+            grid[r][c].setNest(nest_list[i]);
+        }
+    }
+
+    /**
+     * place all the baskets into random, empty locations.
+     */
+    public void place_baskets()
+    {
+        for (int i = 0; i<basket_list.length; i++)
+        {
+            basket_list[i] = new Basket();
+            while (grid[basket_list[i].getRow()][basket_list[i].getCol()].getContentType() != Cell.TYPE_EMPTY)
+                basket_list[i].pickRandomLocation();
+            grid[basket_list[i].getRow()][basket_list[i].getCol()].setBasket(basket_list[i]);
+        }
+    }
+
+    /**
+     * place all the ants into random, empty locations
+     */
+    public void place_ants()
+    {
+        // TODO: use the previous two methods as a guide to create three ants, pick random locations for them and
+        //       continue to do so until you find an empty cell. Then a) make sure the ant_list has that ant,
+        //       b) set the ant for that cell to be the ant you just created, and c) tell the ant about its color and
+        //       nest.
+
     }
 
     /**
@@ -86,4 +130,8 @@ public class World
         return result;
     }
 
+    public void updateBaskets()
+    {
+
+    }
 }
