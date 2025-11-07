@@ -93,8 +93,9 @@ public class PicnicPanel extends JPanel implements Runnable
      */
     private void updateAnimation()
     {
-        // TODO: This is the primary method you will be working in.
-        System.out.println("Animating.");
+//        System.out.println("Animating.");
         myWorld.fadeAllScents();
+
+        myWorld.updateBaskets();
     }
 }
