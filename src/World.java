@@ -130,8 +130,20 @@ public class World
         return result;
     }
 
+    /**
+     * search through all the baskets. If any of them is empty, refill it and place it in a new, random location.
+     */
     public void updateBaskets()
     {
-
+        for (Basket b: basket_list)
+            if (b.isEmpty())
+            {
+                b.pickStartingFoodLevel();
+                grid[b.getRow()][b.getCol()].clearBasket();
+                b.pickRandomLocation();
+                while (grid[b.getRow()][b.getCol()].getContentType() != Cell.TYPE_EMPTY)
+                    b.pickRandomLocation();
+                grid[b.getRow()][b.getCol()].setBasket(b);
+            }
     }
 }
