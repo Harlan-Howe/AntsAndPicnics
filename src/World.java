@@ -56,7 +56,7 @@ public class World
         for (int i = 0; i < 3; i++)
         {
             int r, c;
-            do
+            do // do the contents of the {  } at least once.
             {
                 r = (int)(Math.random()*NUM_ROWS_IN_WORLD);
                 c = (int)(Math.random()*NUM_COLS_IN_WORLD);
@@ -138,12 +138,14 @@ public class World
         for (Basket b: basket_list)
             if (b.isEmpty())
             {
-                b.pickStartingFoodLevel();
-                grid[b.getRow()][b.getCol()].clearBasket();
-                b.pickRandomLocation();
-                while (grid[b.getRow()][b.getCol()].getContentType() != Cell.TYPE_EMPTY)
+                grid[b.getRow()][b.getCol()].clearBasket(); // remove the basket from its current cell.
+                do // do contents of the { } at least once.
+                {
                     b.pickRandomLocation();
-                grid[b.getRow()][b.getCol()].setBasket(b);
+                } while (grid[b.getRow()][b.getCol()].getContentType() != Cell.TYPE_EMPTY);
+                grid[b.getRow()][b.getCol()].setBasket(b); // put basket into new cell.
+
+                b.pickStartingFoodLevel(); // refill the basket.
             }
     }
 
