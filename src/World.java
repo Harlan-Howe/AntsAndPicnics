@@ -146,4 +146,21 @@ public class World
                 grid[b.getRow()][b.getCol()].setBasket(b);
             }
     }
+
+    public void moveAllAnts()
+    {
+        for (Ant a: ant_list)
+        {
+            Cell[][] neighborhood = getNeighborhood(a.getRow(), a.getCol());
+            int[] response = a.pickMove(neighborhood);
+
+            // TODO: You write this. "response" is telling you how the ant wants to move (or not).
+            //  Read the documentation for Ant.pickMove()! - you'll need to write that first.
+
+            // Note: if the Ant has moved, you will want to remove it from the cell at its current location and then
+            //       put it into the cell at its new location. (This will also work if it hasn't moved.) Take a look at
+            //       the updateBaskets() method above for something similar.
+        }
+    }
+
 }
