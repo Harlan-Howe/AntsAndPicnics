@@ -64,6 +64,9 @@ public class Nest
         g.setFont(COUNTER_FONT);
         String amount = ""+myTotalCollectedFood;
         int numberWidth = g.getFontMetrics().stringWidth(amount);
+        g.setColor(Color.BLACK);
+        g.drawString(amount,centerX-numberWidth/2+1, centerY+4*Cell.CELL_SIZE/10+1);
+        g.setColor(Color.WHITE);
         g.drawString(amount,centerX-numberWidth/2, centerY+4*Cell.CELL_SIZE/10);
 
     }
