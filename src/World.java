@@ -22,9 +22,9 @@ public class World
         nest_list = new Nest[3];
         ant_list = new Ant[3];
 
-        place_nests();
-        place_baskets();
-        place_ants();
+        placeNests();
+        placeBaskets();
+        placeAnts();
     }
 
     /**
@@ -51,7 +51,7 @@ public class World
     /**
      * put the 3 nests in random, empty locations.
      */
-    public void place_nests()
+    public void placeNests()
     {
         for (int i = 0; i < 3; i++)
         {
@@ -69,7 +69,7 @@ public class World
     /**
      * place all the baskets into random, empty locations.
      */
-    public void place_baskets()
+    public void placeBaskets()
     {
         for (int i = 0; i<basket_list.length; i++)
         {
@@ -83,7 +83,7 @@ public class World
     /**
      * place all the ants into random, empty locations
      */
-    public void place_ants()
+    public void placeAnts()
     {
         // TODO: use the previous two methods as a guide to create three ants, pick random locations for them and
         //       continue to do so until you find an empty cell. Then a) make sure the ant_list has that ant,
@@ -151,8 +151,11 @@ public class World
 
     public void moveAllAnts()
     {
+
         for (Ant a: ant_list)
         {
+            if (a == null) // safety check in case we haven't run placeAnts yet.
+                continue;
             Cell[][] neighborhood = getNeighborhood(a.getRow(), a.getCol());
             int[] response = a.pickMove(neighborhood);
 
