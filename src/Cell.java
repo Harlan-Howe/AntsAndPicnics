@@ -11,7 +11,7 @@ public class Cell
     public static final int TOP_MARGIN = 10;
     public static final int CELL_SIZE = 20;
 
-    public static final int MAX_SCENT = 25;
+    public static final int MAX_SCENT = 50;
 
     private int contentType;
     private int myRow, myCol;
@@ -199,7 +199,9 @@ public class Cell
      */
     public void drawSelf(Graphics g)
     {
-        g.setColor(new Color(255*myScents[0]/MAX_SCENT, 255*myScents[1]/MAX_SCENT, 255*myScents[2]/MAX_SCENT));
+        g.setColor(new Color(255-3*(MAX_SCENT-myScents[0]),
+                             255-3*(MAX_SCENT-myScents[1]),
+                             255-3*(MAX_SCENT-myScents[2])));
         g.fillRect(LEFT_MARGIN+myCol*CELL_SIZE, TOP_MARGIN+myRow*CELL_SIZE, CELL_SIZE, CELL_SIZE);
         g.setColor(Color.darkGray);
         g.drawRect(LEFT_MARGIN+myCol*CELL_SIZE, TOP_MARGIN+myRow*CELL_SIZE, CELL_SIZE, CELL_SIZE);
