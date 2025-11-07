@@ -184,6 +184,16 @@ public class Cell
     }
 
     /**
+     * returns the scent level for this cell for the color requested.
+     * @param whichColor - 0 = red; 1 = green; 2 = blue
+     * @return - the level of the corresponding scent on this cell.
+     */
+    public int getScentForColor(int whichColor)
+    {
+        return myScents[whichColor];
+    }
+
+    /**
      * draws this cell, its scent profile, and any contents it has.
      * @param g - the "Graphics' object that has the drawing tools and the canvas in which to draw.
      */

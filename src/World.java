@@ -48,4 +48,42 @@ public class World
                 grid[r][c].fadeScents();
     }
 
+    /**
+     * copies the 3x3 grid of cells in the immediate surroundings of this ant, so that the cell at (row, col) in the
+     * main grid will become item (1, 1) in this mini subgrid. If (row, col) is on an edge or corner of grid, any spaces
+     * that correspond to "out of bounds" locations should be left as null.
+     * For example, if grid is a 4 x 5 array:
+     *   01234
+     *  +-----
+     * 0|ABCDE
+     * 1|FGHIJ
+     * 2|KLMNO
+     * 3|PQRST
+     *
+     * then getNeighborhood(1,2) would return:
+     *    012
+     *   +---
+     *  0|BCD
+     *  1|GHI
+     *  2|LMN
+     *  and getNeighborhood(2, 0) would return:
+     *    012
+     *   +---
+     *  0|.FG
+     *  1|.KL
+     *  2|.PQ
+     *  ... where the "." values represent null.
+     * @param row
+     * @param col
+     * @return a 3 x 3 array of cells (and/or nulls) that describe the environment around (row, col) in grid.
+     */
+    public Cell[][] getNeighborhood(int row, int col)
+    {
+        Cell[][] result = new Cell[3][3];
+        // TODO: you write this!
+
+
+        return result;
+    }
+
 }
