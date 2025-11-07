@@ -16,16 +16,16 @@ public class Basket
         pickStartingFoodLevel();
     }
 
-    public int getFoodLevel()
-    {
-        return myFoodLevel;
-    }
-
+    public int getFoodLevel() { return myFoodLevel;}
+    public boolean isEmpty() {return myFoodLevel == 0;}
     public int getRow() { return myRow;}
     public int getCol() { return myCol;}
 
     public void takeFood(int amount)
     {
+        if (amount < 1)
+            throw new RuntimeException("You just tried to remove a non-positive amount of food from the basket at ("+
+                    myRow+", "+myCol+").");
         if (amount > myFoodLevel)
             throw new RuntimeException("You just tried to take more food from the basket at ("+myRow+", "+myCol+
                     ") than it had. Food available is: "+myFoodLevel+" and requested was "+amount+".");
