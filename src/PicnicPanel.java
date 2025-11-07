@@ -5,10 +5,11 @@ public class PicnicPanel extends JPanel implements Runnable
 {
     // CONSTANTS
     public static final Color[] NEST_AND_ANT_COLORS = {Color.RED, Color.GREEN, Color.BLUE};
-    private static final int DELAY = 500; // milliseconds between animations steps, so 1000 -> 1 second.
+    private static final int DELAY = 50; // milliseconds between animations steps, so 1000 -> 1 second.
 
     // MEMBER VARIABLES
     private World myWorld;
+    private int stepCount;
 
     // stuff for animation... probably more than we need; I borrowed code from another project that could start/stop.
     private volatile boolean running;
@@ -18,6 +19,7 @@ public class PicnicPanel extends JPanel implements Runnable
     {
         super();
         myWorld = w;
+        stepCount = 0;
         setBackground(Color.lightGray);
     }
 
@@ -30,6 +32,11 @@ public class PicnicPanel extends JPanel implements Runnable
     {
         super.paintComponent(g);
         myWorld.drawSelf(g);
+        g.setColor(NEST_AND_ANT_COLORS[((stepCount)/100+2)%3]);
+        g.fillRect(0,0,getWidth(),Cell.TOP_MARGIN);
+
+        g.setColor(NEST_AND_ANT_COLORS[(stepCount/100)%3]);
+        g.fillRect(0,0,(stepCount%100+1)*getWidth()/100, Cell.TOP_MARGIN);
     }
 
     /**
@@ -95,7 +102,8 @@ public class PicnicPanel extends JPanel implements Runnable
     {
 //        System.out.println("Animating.");
         myWorld.fadeAllScents();
-
+        myWorld.moveAllAnts();
         myWorld.updateBaskets();
+        stepCount++;
     }
 }
