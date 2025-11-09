@@ -70,4 +70,9 @@ public class Nest
         g.drawString(amount,centerX-numberWidth/2, centerY+4*Cell.CELL_SIZE/10);
 
     }
+
+    public String toString()
+    {
+        return "Nest @ ("+myRow+", "+myCol+") color: "+myColor+" food received: "+myTotalCollectedFood;
+    }
 }
