@@ -215,4 +215,18 @@ public class Cell
         if (contentType == TYPE_ANT)
             myAnt.drawSelf(g);
     }
+
+    public String toString()
+    {
+        String result = "CELL at ("+myRow+", "+myCol+") Scents["+myScents[0]+", "+myScents[1]+", "+myScents[2]+"]";
+        if (contentType == TYPE_EMPTY)
+            result += " is empty.";
+        if (contentType == TYPE_NEST)
+            result += " has nest: "+myNest.toString();
+        if (contentType == TYPE_BASKET)
+            result += " has basket: "+myBasket.toString();
+        if (contentType == TYPE_ANT)
+            result += " has ant: "+myAnt.toString();
+        return result;
+    }
 }
