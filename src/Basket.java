@@ -85,4 +85,9 @@ public class Basket
         g.setColor(Color.BLACK);
         g.drawString(amount, centerX-stringWidth/2, centerY+Cell.CELL_SIZE/5);
     }
+
+    public String toString()
+    {
+        return "Basket at ("+myRow+", "+myCol+") with "+myFoodLevel+" remaining.";
+    }
 }
