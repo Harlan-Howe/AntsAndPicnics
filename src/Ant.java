@@ -67,4 +67,13 @@ public class Ant
         // draws the ant as a dot, for now.
         g.drawOval(centerX - 4*Cell.CELL_SIZE/10, centerY - 4*Cell.CELL_SIZE/10, 4*Cell.CELL_SIZE/5, 4*Cell.CELL_SIZE/5);
     }
+
+    public String toString()
+    {
+        String result = "Ant at ("+getRow()+", "+getCol()+") color: "+getColor();
+
+        // TODO: add stuff here to result, if desired.
+
+        return result;
+    }
 }
