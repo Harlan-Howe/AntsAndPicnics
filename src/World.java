@@ -164,13 +164,18 @@ public class World
         {
             if (a == null) // safety check in case we haven't run placeAnts yet.
                 continue;
+
+            // find the area around this ant.
             Cell[][] neighborhood = getNeighborhood(a.getRow(), a.getCol());
+
+            // ask the ant what it wants to do
             int[] response = a.pickMove(neighborhood);
 
+            // move the ant, according to its wishes.
             // TODO: You write this. "response" is telling you how the ant wants to move (or not).
             //  Read the documentation for Ant.pickMove()! - you'll need to write that first.
 
-            // Note: if the Ant has moved, you will want to remove it from the cell at its current location and then
+            // Note: if the Ant wants to move, you will want to remove it from the cell at its current location and then
             //       put it into the cell at its new location. (This will also work if it hasn't moved.) Take a look at
             //       the updateBaskets() method above for something similar.
         }
