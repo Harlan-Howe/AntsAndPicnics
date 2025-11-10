@@ -4,6 +4,7 @@ public class World
 {
     public static final int NUM_ROWS_IN_WORLD = 40;
     public static final int NUM_COLS_IN_WORLD = 40;
+    private static final int NUM_BASKETS = 6;
 
     private Cell[][] grid;
     private Basket[] basket_list;
@@ -18,7 +19,7 @@ public class World
             for (int c = 0; c<NUM_COLS_IN_WORLD; c++)
                 grid[r][c] = new Cell(r,c);
 
-        basket_list = new Basket[6];
+        basket_list = new Basket[NUM_BASKETS];
         nest_list = new Nest[3];
         ant_list = new Ant[3];
 
