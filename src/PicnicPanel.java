@@ -5,7 +5,7 @@ public class PicnicPanel extends JPanel implements Runnable
 {
     // CONSTANTS
     public static final Color[] NEST_AND_ANT_COLORS = {Color.RED, Color.GREEN, Color.BLUE};
-    private static final int DELAY = 50; // milliseconds between animations steps, so 1000 -> 1 second.
+    private static final int DELAY = 1000; // milliseconds between animations steps, so 500 -> 1/2 second. Must be ≥ 1.
 
     // MEMBER VARIABLES
     private World myWorld;
