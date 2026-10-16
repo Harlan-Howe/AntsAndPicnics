@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Ant
+public class  Ant
 {
     // TODO: you'll need to create variables for this class!
 
