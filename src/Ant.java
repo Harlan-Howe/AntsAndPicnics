@@ -66,6 +66,8 @@ public class  Ant
 
         // draws the ant as a dot, for now.
         g.drawOval(centerX - 4*Cell.CELL_SIZE/10, centerY - 4*Cell.CELL_SIZE/10, 4*Cell.CELL_SIZE/5, 4*Cell.CELL_SIZE/5);
+        // TODO: (Optional) Update this to draw a more elaborate ant, or at least something that indicates a direction.
+
     }
 
     public String toString()
